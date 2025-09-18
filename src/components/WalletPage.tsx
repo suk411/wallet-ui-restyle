@@ -55,22 +55,14 @@ const WalletPage = () => {
 
   const BankBindingForm = () => (
     <Dialog open={isBindBankOpen} onOpenChange={setIsBindBankOpen}>
-      <DialogContent className="bg-card border-border max-w-md mx-auto">
+      <DialogContent className="bg-card/95 backdrop-blur-sm border-border max-w-md mx-auto">
         <DialogHeader className="relative">
           <DialogTitle className="text-center text-foreground">Bind Bank Card</DialogTitle>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="absolute right-0 top-0 text-muted-foreground hover:text-foreground"
-            onClick={() => setIsBindBankOpen(false)}
-          >
-            <X className="w-4 h-4" />
-          </Button>
         </DialogHeader>
         <div className="space-y-4 p-4">
           <div className="space-y-2">
             <Select>
-              <SelectTrigger className="bg-input border-border text-foreground">
+              <SelectTrigger className="bg-input border-border text-foreground h-10">
                 <SelectValue placeholder="Please Select a Bank" />
               </SelectTrigger>
               <SelectContent className="bg-popover border-border">
@@ -85,32 +77,32 @@ const WalletPage = () => {
           <div className="space-y-2">
             <Input 
               placeholder="Please Enter Your Name" 
-              className="bg-input border-border text-foreground placeholder:text-muted-foreground"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground h-10"
             />
           </div>
           <div className="space-y-2">
             <Input 
               placeholder="Please Enter Your Bank Card Number" 
-              className="bg-input border-border text-foreground placeholder:text-muted-foreground"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground h-10"
             />
           </div>
           <div className="space-y-2">
             <Input 
               placeholder="Please Enter Your IFSC Code" 
-              className="bg-input border-border text-foreground placeholder:text-muted-foreground"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground h-10"
             />
           </div>
           <div className="space-y-2">
             <Input 
               placeholder="Please Enter Your Email" 
-              className="bg-input border-border text-foreground placeholder:text-muted-foreground"
+              className="bg-input border-border text-foreground placeholder:text-muted-foreground h-10"
             />
           </div>
           <div className="text-center text-primary text-sm py-4">
             Please fill in the withdrawal bank information correctly, otherwise you will be responsible for the withdrawal loss!
           </div>
           <Button 
-            className="w-full bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white h-12"
+            className="w-full bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white h-10"
             onClick={() => setIsBindBankOpen(false)}
           >
             Confirm
@@ -131,8 +123,8 @@ const WalletPage = () => {
           <span className="text-lg font-semibold text-primary">200</span>
         </div>
         <div className="flex items-center gap-3">
-          <FileText className="w-6 h-6 text-muted-foreground" />
           <ArrowLeft className="w-6 h-6 text-muted-foreground" />
+          <FileText className="w-6 h-6 text-muted-foreground" />
         </div>
       </div>
 
@@ -180,7 +172,7 @@ const WalletPage = () => {
                     variant={selectedMethod === method ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedMethod(method)}
-                    className="h-10"
+                    className="h-8"
                   >
                     {method}
                   </Button>
@@ -198,7 +190,7 @@ const WalletPage = () => {
                     variant={selectedAmount === amount ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedAmount(amount)}
-                    className={`h-12 ${
+                    className={`h-10 ${
                       selectedAmount === amount
                         ? "bg-wallet-amount-button-selected border-wallet-amount-button-selected text-background"
                         : "bg-wallet-amount-button border-border text-foreground hover:bg-muted"
@@ -250,7 +242,7 @@ const WalletPage = () => {
 
             {/* Confirm Button */}
             <Button 
-              className="w-full h-14 bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white text-lg font-semibold rounded-lg"
+              className="w-full h-12 bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white text-base font-semibold rounded-lg"
               size="lg"
             >
               Confirm
@@ -260,14 +252,14 @@ const WalletPage = () => {
           <>
             {/* Bind Bank Card Section */}
             <Card 
-              className="p-6 bg-card border-2 border-dashed border-primary/30 hover:border-primary/50 transition-colors cursor-pointer"
+              className="p-4 bg-card border-2 border-dashed border-primary/30 hover:border-primary/50 transition-colors cursor-pointer"
               onClick={() => setIsBindBankOpen(true)}
             >
-              <div className="flex flex-col items-center justify-center space-y-3">
-                <div className="w-16 h-16 bg-primary/20 rounded-lg flex items-center justify-center">
-                  <Plus className="w-8 h-8 text-primary" />
+              <div className="flex flex-col items-center justify-center space-y-2">
+                <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                  <Plus className="w-6 h-6 text-primary" />
                 </div>
-                <span className="text-primary font-medium underline">Bind Bank Card</span>
+                <span className="text-primary font-medium underline text-sm">Bind Bank Card</span>
               </div>
             </Card>
 
@@ -299,7 +291,7 @@ const WalletPage = () => {
                     variant={selectedAmount === amount ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedAmount(amount)}
-                    className={`h-12 ${
+                    className={`h-10 ${
                       selectedAmount === amount
                         ? "bg-wallet-amount-button-selected border-wallet-amount-button-selected text-background"
                         : "bg-wallet-amount-button border-border text-foreground hover:bg-muted"
@@ -313,7 +305,7 @@ const WalletPage = () => {
 
             {/* Confirm Button */}
             <Button 
-              className="w-full h-14 bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white text-lg font-semibold rounded-lg"
+              className="w-full h-12 bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white text-base font-semibold rounded-lg"
               size="lg"
             >
               Confirm
