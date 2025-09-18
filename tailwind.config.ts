@@ -57,6 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        wallet: {
+          "amount-button": "hsl(var(--amount-button))",
+          "amount-button-selected": "hsl(var(--amount-button-selected))",
+          "confirm-button": "hsl(var(--confirm-button))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
