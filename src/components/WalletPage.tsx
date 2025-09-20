@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowLeft, FileText, ShoppingCart, CreditCard, X, Plus } from "lucide-react";
+import { ArrowLeft, FileText, ShoppingCart, CreditCard, X, Plus, } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +7,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import cashIcon from './assets/cash-back.png';
+
 
 const WalletPage = () => {
   const [activeTab, setActiveTab] = useState<"recharge" | "withdraw">("recharge");
@@ -14,7 +16,7 @@ const WalletPage = () => {
   const [selectedMethod, setSelectedMethod] = useState<string>("Fpay");
   const [isBindBankOpen, setIsBindBankOpen] = useState(false);
 
-  const amounts = [200, 300, 500, 800, 1000, 1500, 2000, 5000, 10000, 20000, 30000, 50000, 100000];
+  const amounts = [200, 300, 500, 1000, 2000, 5000, 10000, 50000,];
   const withdrawalAmounts = [100, 400, 600, 800, 1000, 2000, 5000, 10000];
   const paymentMethods = ["Fpay", "LGpay", "Other"];
 
@@ -105,20 +107,21 @@ const WalletPage = () => {
     "Vidharbha Konkan Gramin Bank",
     "Yes Bank"
   ];
+  const [cashbackSelected, setCashbackSelected] = useState<"apply" | "later">("later"); 
 
   const BankBindingForm = () => (
     <Dialog open={isBindBankOpen} onOpenChange={setIsBindBankOpen}>
-      <DialogContent className="bg-card/95 backdrop-blur-sm border-border max-w-md mx-auto">
+      <DialogContent className="bg-card/50 backdrop-blur-sm bg-[#2b0d0d] bg-opacity-50 rounded-xl border-border w-80 max-w-md mx-auto">
         <DialogHeader className="relative">
-          <DialogTitle className="text-center text-foreground">Bind Bank Card</DialogTitle>
+          <DialogTitle className=" text-center text-foreground">Bind Bank Card</DialogTitle>
         </DialogHeader>
         <div className="space-y-4 p-4">
           <div className="space-y-2">
             <Select>
-              <SelectTrigger className="bg-input border-border text-foreground h-10">
+              <SelectTrigger className=" bg-input border-border text-foreground h-10">
                 <SelectValue placeholder="Please Select a Bank" />
               </SelectTrigger>
-              <SelectContent className="bg-popover border-border">
+              <SelectContent className="w-60 bg-popover border-border">
                 {banks.map((bank) => (
                   <SelectItem key={bank} value={bank} className="text-popover-foreground">
                     {bank}
@@ -128,47 +131,53 @@ const WalletPage = () => {
             </Select>
           </div>
           <div className="space-y-2">
-            <Input 
-              placeholder="Please Enter Your Name" 
+            <Input
+              placeholder=" Enter Your Name"
               className="bg-input border-border text-foreground placeholder:text-muted-foreground h-10"
             />
           </div>
           <div className="space-y-2">
-            <Input 
-              placeholder="Please Enter Your Bank Card Number" 
+            <Input
+              placeholder="Enter Account  Number"
               className="bg-input border-border text-foreground placeholder:text-muted-foreground h-10"
             />
           </div>
           <div className="space-y-2">
-            <Input 
-              placeholder="Please Enter Your IFSC Code" 
+            <Input
+              placeholder="Enter  IFSC Code"
               className="bg-input border-border text-foreground placeholder:text-muted-foreground h-10"
             />
           </div>
           <div className="space-y-2">
-            <Input 
-              placeholder="Please Enter Your Email" 
+            <Input
+              placeholder="Please Enter  Email"
               className="bg-input border-border text-foreground placeholder:text-muted-foreground h-10"
             />
           </div>
           <div className="text-center text-primary text-sm py-4">
             Please fill in the withdrawal bank information correctly, otherwise you will be responsible for the withdrawal loss!
           </div>
-          <Button 
-            className="w-full bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white h-10"
-            onClick={() => setIsBindBankOpen(false)}
-          >
-            Confirm
-          </Button>
+          {/* Confirm Button */}
+          <div className="flex justify-center relative">
+            <Button
+              className="bg-gradient-to-b from-yellow-300 via-golden to-yellow-600 text-black font-bold py-4 px-16 rounded-full text-base hover:from-yellow-400 hover:via-golden hover:to-yellow-700 transition-all duration-300 shadow-lg border border-yellow-400 relative overflow-hidden"
+              size="lg"
+              data-testid="button-withdraw"
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 rounded-full"></div>
+              <div className="absolute top-1 left-4 right-4 h-1 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full"></div>
+              <span className="relative z-10 tracking-wide">Confirm</span>
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
   );
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-[#2b0d0d] bg-background text-foreground">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-border">
+      <div className="bg-[#450b00] flex items-center justify-between p-4 border-b border-border">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
             <span className="text-primary-foreground font-bold">₹</span>
@@ -176,66 +185,108 @@ const WalletPage = () => {
           <span className="text-lg font-semibold text-primary">200</span>
         </div>
         <div className="flex items-center gap-3">
-          <ArrowLeft className="w-6 h-6 text-muted-foreground" />
+          <Plus className="rotate-45 w-6 h-7 text-muted-foreground" />
           <FileText className="w-6 h-6 text-muted-foreground" />
         </div>
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex bg-card m-4 rounded-lg p-1">
-        <button
-          onClick={() => setActiveTab("recharge")}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-md transition-all ${
-            activeTab === "recharge"
-              ? "bg-accent text-accent-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <ShoppingCart className="w-4 h-4" />
-          Recharge
-        </button>
-        <button
-          onClick={() => setActiveTab("withdraw")}
-          className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-md transition-all ${
-            activeTab === "withdraw"
-              ? "bg-accent text-accent-foreground shadow-sm"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          <CreditCard className="w-4 h-4" />
-          Withdraw
-        </button>
-      </div>
+      <div className="flex bg-card m-2 rounded-lg gap-2 bg-[#2b0d0d]">
+  <button
+    onClick={() => setActiveTab("recharge")}
+    className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-xl transition-all text-black font-bold bg-gradient-to-b from-yellow-300 via-golden to-yellow-600 border border-yellow-400 shadow-lg relative overflow-hidden ${
+      activeTab === "recharge"
+        ? "hover:from-yellow-400 hover:via-golden hover:to-yellow-700 border-b-2 border-yellow-300"
+        : "hover:from-yellow-400 hover:via-golden hover:to-yellow-700 text-black"
+    }`}
+  >
+    <ShoppingCart className="w-4 h-4" />
+    Recharge
+    <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 rounded-full pointer-events-none"></div>
+    <div className="absolute top-1 left-4 right-4 h-1 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full pointer-events-none"></div>
+  </button>
+
+  <button
+    onClick={() => setActiveTab("withdraw")}
+    className={`flex-1 flex items-center justify-center gap-2 py-2 px-4 rounded-xl transition-all text-black font-bold bg-gradient-to-b from-yellow-300 via-golden to-yellow-600 border border-yellow-400 shadow-lg relative overflow-hidden ${
+      activeTab === "withdraw"
+        ? "hover:from-yellow-400 hover:via-golden hover:to-yellow-700 border-b-2 border-yellow-300"
+        : "hover:from-yellow-400 hover:via-golden hover:to-yellow-700 text-black"
+    }`}
+  >
+    <CreditCard className="w-4 h-4" />
+    Withdraw
+    <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 rounded-full pointer-events-none"></div>
+    <div className="absolute top-1 left-4 right-4 h-1 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full pointer-events-none"></div>
+  </button>
+</div>
 
       <div className="px-4 space-y-6">
         {activeTab === "recharge" ? (
           <>
-            {/* Payment Method Selection */}
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-sm font-medium text-muted-foreground">Recharge Method</h3>
+              <div className=" flex items-center justify-between mb-3">
+                <h3 className="text-sm font-medium text-muted-foreground">
+                  Recharge Method
+                </h3>
                 <Badge variant="secondary" className="text-xs">
                   {selectedMethod}
                 </Badge>
               </div>
-              <div className="grid grid-cols-3 gap-2">
-                {paymentMethods.map((method) => (
-                  <Button
-                    key={method}
-                    variant={selectedMethod === method ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setSelectedMethod(method)}
-                    className="h-8"
-                  >
-                    {method}
-                  </Button>
-                ))}
+              <div className=" grid grid-cols-3 gap-2">
+                {paymentMethods.map((method) => {
+                  const isActive = selectedMethod === method;
+                  return (
+                    <Button
+                      key={method}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSelectedMethod(method)}
+                      className={
+                        ` rounded-lg
+              h-9 relative px-2
+              ${isActive ? "border-[1px] border-[#ffe032] bg-yellow-300/30" : ""}
+            `
+                      }
+                      style={isActive ? { borderColor: "#FFD700" } : {}}
+                    >
+                      {method}
+                      {isActive && (
+                        <span
+                          className="bg bg-yellow-600 absolute bottom-0 right-0 rounded-sm flex items-center justify-center"
+                          style={{
+                            width: "15px",
+                            height: "15px",
+                            border: "1.5px solid #FFD700",
+                          }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                          >
+                            <path
+                              d="M5 11L9 15L15 7"
+                              stroke="#FFD700"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              fill="none"
+                            />
+                          </svg>
+                        </span>
+                      )}
+                    </Button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Amount Selection */}
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-3">Deposit Amount</h3>
+            <div >
+              <h3 className=" text-sm font-medium text-muted-foreground mb-3">Deposit Amount</h3>
               <div className="grid grid-cols-4 gap-2">
                 {amounts.map((amount) => (
                   <Button
@@ -243,11 +294,10 @@ const WalletPage = () => {
                     variant={selectedAmount === amount ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedAmount(amount)}
-                    className={`h-10 ${
-                      selectedAmount === amount
-                        ? "bg-wallet-amount-button-selected border-wallet-amount-button-selected text-background"
+                    className={` h-12 ${selectedAmount === amount
+                        ? " bg-wallet-amount-button-selected border-wallet-amount-button-selected text-background"
                         : "bg-wallet-amount-button border-border text-foreground hover:bg-muted"
-                    }`}
+                      }`}
                   >
                     ₹ {amount.toLocaleString("en-IN")}
                   </Button>
@@ -255,56 +305,78 @@ const WalletPage = () => {
               </div>
             </div>
 
-            {/* Activity Section */}
-            <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-3">Participate in Activity</h3>
-              <div className="grid grid-cols-2 gap-3">
-                <Card className="p-4 bg-card border-border hover:bg-muted/50 transition-colors cursor-pointer">
-                  <div className="flex flex-col items-center text-center space-y-2">
-                    <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
-                      <div className="text-2xl">🎁</div>
-                    </div>
-                    <span className="text-sm font-medium">Cash Back</span>
-                  </div>
-                </Card>
-                <Card className="p-4 bg-card border-border hover:bg-muted/50 transition-colors cursor-pointer">
-                  <div className="flex flex-col items-center text-center space-y-2">
-                    <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center">
-                      <div className="text-2xl">✅</div>
-                    </div>
-                    <span className="text-sm font-medium">Sign-In</span>
-                  </div>
-                </Card>
-              </div>
+           <div>
+      <h3 className="text-sm font-medium text-muted-foreground mb-3">Recharge Cashback</h3>
+      <div className="grid grid-cols-2 gap-3">
+        {/* Apply Cashback Card */}
+        <Card
+          className={`bg-card border-border transition-colors cursor-pointer border-x-0 ${
+            cashbackSelected === "apply"
+              ? "border-yellow-500 bg-yellow-500 bg-opacity-30"
+              : ""
+          }`}
+          onClick={() => setCashbackSelected("apply")}
+        >
+          <div className="grid grid-cols-2 items-center text-center">
+            <span className="grid grid-cols-2 items-center justify-center text-sm font-medium">
+              <img src={cashIcon} alt="Share" className="m-3 ml-7 h-8" />
+            </span>
+            <span className="mr-7">Apply</span>
+          </div>
+        </Card>
+
+        {/* Later Card */}
+        <Card
+          className={`bg-card border-border transition-colors cursor-pointer border-x-0 ${
+            cashbackSelected === "later"
+              ? "border-yellow-500 bg-yellow-500 bg-opacity-30"
+              : ""
+          }`}
+          onClick={() => setCashbackSelected("later")}
+        >
+          <div className="flex items-center justify-center mt-4">Later</div>
+        </Card>
+      </div>
+
+      {/* Conditionally render Amount Summary if Apply selected */}
+      {cashbackSelected === "apply" && (
+        <Card className="rounded-lg overflow-hidden border border-[#f0c46c] p-0 shadow-sm bg-gradient-to-r from-[#3d040b] to-[#381c1f] mt-4">
+          <div className="flex items-center justify-between bg-gradient-to-b from-[#ffe36d] to-[#ffc947] px-3 py-0.5">
+            <div className="text-[14px] font-medium text-[#000000]">Deposit Amount</div>
+            <div className="text-[14px] font-medium text-[#000000]">Cashback amount</div>
+          </div>
+          <div className="flex items-center justify-between bg-gradient-to-r from-[#641c06] to-[#300509] px-4 py-2">
+            <div className="flex flex-col items-start">
+              <div className="text-[17px] font-semibold text-[#ffe36d] drop-shadow-sm">₹{selectedAmount}</div>
             </div>
+            <div className="text-[26px] font-bold text-[#ffe36d] mx-2">+</div>
+            <div className="flex flex-col items-end">
+              <div className="text-[17px] font-semibold text-[#ffe36d] drop-shadow-sm">₹{Math.floor(selectedAmount * 0.1)}</div>
+            </div>
+          </div>
+        </Card>
+      )}
+    </div>
 
-            {/* Amount Summary */}
-            <Card className="p-4 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
-              <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                  <div className="text-sm text-muted-foreground">Deposit Amount</div>
-                  <div className="text-xl font-bold text-primary">₹{selectedAmount}</div>
-                </div>
-                <div className="text-2xl font-bold text-muted-foreground">+</div>
-                <div className="space-y-1 text-right">
-                  <div className="text-sm text-muted-foreground">Cashback amount</div>
-                  <div className="text-xl font-bold text-accent">₹{Math.floor(selectedAmount * 0.1)}</div>
-                </div>
-              </div>
-            </Card>
 
-            {/* Confirm Button */}
-            <Button 
-              className="w-full h-12 bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white text-base font-semibold rounded-lg"
-              size="lg"
-            >
-              Confirm
-            </Button>
+
+            {/* pay Button */}
+            <div className="flex justify-center relative">
+              <Button
+                className="bg-gradient-to-b from-yellow-300 via-golden to-yellow-600 text-black font-bold py-4 px-16 rounded-full text-base hover:from-yellow-400 hover:via-golden hover:to-yellow-700 transition-all duration-300 shadow-lg border border-yellow-400 relative overflow-hidden"
+                size="lg"
+                data-testid="button-withdraw"
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 rounded-full"></div>
+                <div className="absolute top-1 left-4 right-4 h-1 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full"></div>
+                <span className="relative z-10 tracking-wide">Pay</span>
+              </Button>
+            </div>
           </>
         ) : (
           <>
             {/* Bind Bank Card Section */}
-            <Card 
+            <Card
               className="p-4 bg-card border-2 border-dashed border-primary/30 hover:border-primary/50 transition-colors cursor-pointer"
               onClick={() => setIsBindBankOpen(true)}
             >
@@ -344,29 +416,32 @@ const WalletPage = () => {
                     variant={selectedAmount === amount ? "default" : "outline"}
                     size="sm"
                     onClick={() => setSelectedAmount(amount)}
-                    className={`h-10 ${
-                      selectedAmount === amount
+                    className={`h-10 ${selectedAmount === amount
                         ? "bg-wallet-amount-button-selected border-wallet-amount-button-selected text-background"
                         : "bg-wallet-amount-button border-border text-foreground hover:bg-muted"
-                    }`}
+                      }`}
                   >
                     ₹ {amount}
                   </Button>
                 ))}
               </div>
             </div>
-
-            {/* Confirm Button */}
-            <Button 
-              className="w-full h-12 bg-wallet-confirm-button hover:bg-wallet-confirm-button/90 text-white text-base font-semibold rounded-lg"
-              size="lg"
-            >
-              Confirm
-            </Button>
+            {/* Withdraw Button */}
+            <div className="flex justify-center relative">
+              <Button
+                className="bg-gradient-to-b from-yellow-300 via-golden to-yellow-600 text-black font-bold py-4 px-12 rounded-full text-base hover:from-yellow-400 hover:via-golden hover:to-yellow-700 transition-all duration-300 shadow-lg border border-yellow-400 relative overflow-hidden"
+                size="lg"
+                data-testid="button-withdraw"
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/10 rounded-full"></div>
+                <div className="absolute top-1 left-4 right-4 h-1 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full"></div>
+                <span className="relative z-10 tracking-wide">Withdraw</span>
+              </Button>
+            </div>
 
             {/* VIP Info */}
             <div className="text-center text-primary text-sm">
-              After becoming a VIP, you can withdraw immediately
+              Withdrawal money after becoming a VIP player
             </div>
           </>
         )}
